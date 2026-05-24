@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Hochbeet_Planer.Models;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -17,6 +18,16 @@ namespace Hochbeet_Planer
     public partial class MainWindow : Window
     {
         private int zellenGroesse = 10; //1Zelle = 10cm
+        private Pflanze paradaiser = new Pflanze //neues Objekt erstellt
+        {
+            Name = "Paradaiser",
+            BreiteInZellen = 4,
+            LaengeInZellen = 4,
+            FarbeR = 180,
+            FarbeG = 30,
+            FarbeB = 30
+        };
+        
 
         public MainWindow()
         {

@@ -9,7 +9,7 @@ namespace Hochbeet_Planer.Models
         public string Name { get; set; }
         //Wie viele Zellen (breite länge?)
         public int BreiteInZellen { get; set; }
-        public int LaengeInZahlen { get; set; }
+        public int LaengeInZellen { get; set; }
         //Farben im Beet (RGB Werte 0-255)
         public byte FarbeR { get; set; }
         public byte FarbeG { get; set; }
