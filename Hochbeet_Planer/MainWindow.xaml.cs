@@ -57,10 +57,12 @@ namespace Hochbeet_Planer
                         Background = new SolidColorBrush(Color.FromRgb(139, 90, 43)),
                         BorderBrush = new SolidColorBrush(Color.FromRgb(101, 67, 33)),
                         Margin = new Thickness(2),
+                        Cursor = Cursors.Hand //hand zeiger wie startseite
                     };
                     Grid.SetRow(zelle, j);
                     Grid.SetColumn(zelle, i);
                     grdHochbeet.Children.Add(zelle);
+                    zelle.MouseLeftButtonDown += Zelle_Click;
                 }
             }
 
@@ -79,6 +81,16 @@ namespace Hochbeet_Planer
             }
             MessageBox.Show($"Breite: {breite}cm, Länge: {laenge}cm");
             BeetGenerieren(breite, laenge); 
+        }
+
+        private void Zelle_Click(object sender, MouseButtonEventArgs e)
+        {
+            Border zelle = (Border)sender; //der sender(die angeklickte Zelle) ist ein Border
+
+            if (rbParadaiser.IsChecked == true) //ob Paradaeiser angehakerlt ist - ausgewählte Pflanze
+            {
+                zelle.Background = new SolidColorBrush(Color.FromRgb(180,30, 30));
+            }
         }
     }
 }
