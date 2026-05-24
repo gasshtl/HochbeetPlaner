@@ -20,8 +20,30 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="250"/>
             </Grid.ColumnDefinitions>
+            <!--rechts Maße-->
+            <StackPanel Grid.Column="1" Background="#f0f0e0" Margin="0" Width="auto">
+                <Border Background="#1a6b4a" Padding="8" HorizontalAlignment="Stretch">
+                    <TextBlock Text="Hochbeet Maße" Foreground="#e8f5ee" FontSize="14" FontWeight="Bold"/>
+                </Border>
+                <StackPanel Orientation="Horizontal" Margin="8,8,8,4">
+                    <TextBlock Text="Breite(cm):" VerticalAlignment="Center" Margin=" 0,0,8,0" />
+                    <TextBox x:Name="txtBreite" Width="80"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="8,4,8,8">
+                    <TextBlock Text="Länge(cm):" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBox x:Name="txtLaenge" Width="80"/>
+                </StackPanel>
+                <Button x:Name="btnBeetGenerieren" Content="Beet generieren" Margin="8,4,8,8" Background="#1a6b4a" Foreground="#e8f5ee"/>
+                <!--rechts Pflanzen-->
+                <Border Background="#1a6b4a" Padding="8" HorizontalAlignment="Stretch">
+                    <TextBlock Text="Pflanzenliste" Foreground="#e8f5ee" FontSize="14" FontWeight="Bold"/>
+                </Border>
+                <RadioButton x:Name="rbParadaiser" Content="🍅 Paradaiser" Margin="8,6,8,2" IsChecked="False"/>
+
+            </StackPanel>
+            
         </Grid>
     </Grid>
 </Window>
