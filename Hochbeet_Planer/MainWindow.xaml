@@ -23,9 +23,9 @@
                 <ColumnDefinition Width="250"/>
             </Grid.ColumnDefinitions>
             <!--Mitte Hochbeetbereich-->
-            <Border Grid.Column="0" Background="#ffffff" Margin="8">
-                <TextBlock Text="Hier kommt das HochbeetRaster rein" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#888888"/>
-            </Border>
+            <ScrollViewer Grid.Column="0" Margin="8"> <!--zum scrollen-->
+                <Grid x:Name="grdHochbeet" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </ScrollViewer>
             <!--rechts Maße-->
             <StackPanel Grid.Column="1" Background="#f0f0e0" Margin="0" Width="auto">
                 <Border Background="#1a6b4a" Padding="8" HorizontalAlignment="Stretch">
@@ -39,7 +39,8 @@
                     <TextBlock Text="Länge(cm):" VerticalAlignment="Center" Margin="0,0,8,0"/>
                     <TextBox x:Name="txtLaenge" Width="80"/>
                 </StackPanel>
-                <Button x:Name="btnBeetGenerieren" Content="Beet generieren" Margin="8,4,8,8" Background="#1a6b4a" Foreground="#e8f5ee"/>
+                <Button x:Name="btnBeetGenerieren" Content="Beet generieren" Margin="8,4,8,8" 
+                        Background="#1a6b4a" Foreground="#e8f5ee" Click="btnBeetGenerieren_Click"/>
                 <!--rechts Pflanzen-->
                 <Border Background="#1a6b4a" Padding="8" HorizontalAlignment="Stretch">
                     <TextBlock Text="Pflanzenliste" Foreground="#e8f5ee" FontSize="14" FontWeight="Bold"/>
