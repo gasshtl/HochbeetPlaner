@@ -92,5 +92,6 @@ namespace Hochbeet_Planer
                 zelle.Background = new SolidColorBrush(Color.FromRgb(180,30, 30));
             }
         }
+
     }
 }
