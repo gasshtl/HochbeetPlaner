@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hochbeet_Planer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Hochbeet Planer Editor" Height="600" Width="1000">
+    <!--Titelbalken oben "Hochbeet Planer Editor"-->
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="#1a6b4a" Padding="10">
+            <TextBlock Text="Hochbeet Planer Editor" Foreground="#e8f5ee" FontSize="18" FontWeight="Bold"/>
+        </Border>
+        <!--Hauptbereich der Seite (Beet mittig & Pflanzen rechts)-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="220"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
     </Grid>
 </Window>
