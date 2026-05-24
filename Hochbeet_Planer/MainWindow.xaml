@@ -22,6 +22,10 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="250"/>
             </Grid.ColumnDefinitions>
+            <!--Mitte Hochbeetbereich-->
+            <Border Grid.Column="0" Background="#ffffff" Margin="8">
+                <TextBlock Text="Hier kommt das HochbeetRaster rein" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#888888"/>
+            </Border>
             <!--rechts Maße-->
             <StackPanel Grid.Column="1" Background="#f0f0e0" Margin="0" Width="auto">
                 <Border Background="#1a6b4a" Padding="8" HorizontalAlignment="Stretch">
@@ -43,7 +47,17 @@
                 <RadioButton x:Name="rbParadaiser" Content="🍅 Paradaiser" Margin="8,6,8,2" IsChecked="False"/>
 
             </StackPanel>
-            
+                       
+        </Grid>
+        <!--"Footer" Buttons-->
+        <Grid Grid.Row="2" Background="#1a6b4a">
+            <StackPanel Orientation="Horizontal" Margin="8,4,8,4">
+                <Button x:Name="btnZufall" Content="🎲 Zufallsbeet" Margin="4,6,4,6"/>
+                <Button x:Name="btnSpeichern" Content="💾 Speichern" Margin="4,6,4,6"/>
+                 <Button x:Name="btnLaden" Content="📂 Laden" Margin="4,6,4,6"/>
+                <Button x:Name="btnNeu" Content="🌱 Neu" Margin="4,6,4,6"/>
+                <Button x:Name="btnLoeschen" Content="🗑 Löschen" Margin="4,6,4,6"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>
