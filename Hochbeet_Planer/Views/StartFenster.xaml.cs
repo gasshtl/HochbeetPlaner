@@ -21,5 +21,12 @@ namespace Hochbeet_Planer.Views
         {
             InitializeComponent();
         }
+
+        private void BtnStart_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow hauptfenster = new MainWindow();
+            hauptfenster.Show(); //startfenster zeigt sich
+            this.Close(); //startfenster schließt sich wieder
+        }
     }
 }
