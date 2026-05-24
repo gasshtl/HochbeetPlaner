@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="Hochbeet Planer" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         
+        <Image Grid.Row="0" Source="../Assets/splash.png" Stretch="Uniform"/>
+        <Button Grid.Row="0" Content="Start" Width="150" Height="45"
+                VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,30,25" 
+                Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Cursor="Hand" Opacity="0"/>
     </Grid>
 </Window>
