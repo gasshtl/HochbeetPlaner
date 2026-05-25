@@ -234,7 +234,7 @@ namespace Hochbeet_Planer
             }
             MessageBox.Show("Beet gespeichert :)");
             BeeteAnzeigen();
-        }
+        } 
 
         private void btnLaden_Click(object sender, RoutedEventArgs e)
         {
