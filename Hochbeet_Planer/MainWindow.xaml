@@ -41,6 +41,10 @@
                 </StackPanel>
                 <Button x:Name="btnBeetGenerieren" Content="Beet generieren" Margin="8,4,8,8" 
                         Background="#1a6b4a" Foreground="#e8f5ee" Click="btnBeetGenerieren_Click"/>
+                <Border Background="#1a6b4a" Padding="8" HorizontalAlignment="Stretch">
+                    <TextBlock Text="Gespeicherte Beete" Foreground="#e8f5ee" FontSize="14" FontWeight="Bold"/>
+                </Border>
+                <ListBox x:Name="listBeete" Height="120" Margin="8,4,8,4"/>
                 <!--rechts Pflanzen-->
                 <Border Background="#1a6b4a" Padding="8" HorizontalAlignment="Stretch">
                     <TextBlock Text="Pflanzenliste" Foreground="#e8f5ee" FontSize="14" FontWeight="Bold"/>
