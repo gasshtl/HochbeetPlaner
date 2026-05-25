@@ -18,15 +18,8 @@ namespace Hochbeet_Planer
     public partial class MainWindow : Window
     {
         private int zellenGroesse = 10; //1Zelle = 10cm
-        private Pflanze paradaiser = new Pflanze //neues Objekt erstellt
-        {
-            Name = "Paradaiser",
-            BreiteInZellen = 4,
-            LaengeInZellen = 4,
-            FarbeR = 180,
-            FarbeG = 30,
-            FarbeB = 30
-        };
+        private Border[,] zellenGrid;
+        private Pflanze ausgewaehltePflanze;
         
 
         public MainWindow()
@@ -43,6 +36,9 @@ namespace Hochbeet_Planer
 
             int anzahlSpalten = breite / zellenGroesse;
             int anzahlZeilen = laenge / zellenGroesse;
+
+            //Border Array anlegen - brauche border kein int oder so!!
+            zellenGrid = new Border[anzahlZeilen, anzahlSpalten];
 
             //Spalten anlegen
             for (int i = 0; i < anzahlSpalten; i++)
@@ -73,6 +69,7 @@ namespace Hochbeet_Planer
                     Grid.SetRow(zelle, j);
                     Grid.SetColumn(zelle, i);
                     grdHochbeet.Children.Add(zelle);
+                    zellenGrid[j, i] = zelle;
                     zelle.MouseLeftButtonDown += Zelle_Click;
                 }
             }
@@ -90,19 +87,46 @@ namespace Hochbeet_Planer
                 MessageBox.Show("Bitte nur ganze Zahlen eingeben!");
                 return;
             }
-            MessageBox.Show($"Breite: {breite}cm, Länge: {laenge}cm");
             BeetGenerieren(breite, laenge); 
         }
 
         private void Zelle_Click(object sender, MouseButtonEventArgs e)
         {
+            
             Border zelle = (Border)sender; //der sender(die angeklickte Zelle) ist ein Border
+
+            int zeile = Grid.GetRow(zelle); //hineinschreiben und ablesen ins array
+            int spalte = Grid.GetColumn(zelle);
+
+            if (zeile + ausgewaehltePflanze.LaengeInZellen > zellenGrid.GetLength(0)) return;//damit Programm nicht mehr abstürzt
+            if (spalte + ausgewaehltePflanze.BreiteInZellen > zellenGrid.GetLength(1)) return;
+
+            if (ausgewaehltePflanze == null ) return; //wenn nichts ausgewählt ist also null dann chill  
 
             if (rbParadaiser.IsChecked == true) //ob Paradaeiser angehakerlt ist - ausgewählte Pflanze
             {
-                zelle.Background = new SolidColorBrush(Color.FromRgb(180,30, 30));
+                for (int j = zeile; j < zeile + ausgewaehltePflanze.LaengeInZellen; j++)
+                {
+                    for (int i = spalte; i < spalte + ausgewaehltePflanze.BreiteInZellen; i++)
+                    {
+                        zellenGrid[j, i].Background =
+                            new SolidColorBrush(Color.FromRgb(180, 30, 30));
+                    }
+                }
             }
         }
 
+        private void rbParadaiser_Checked(object sender, RoutedEventArgs e)
+        {
+            ausgewaehltePflanze = new Pflanze
+            {
+                Name = "Paradaiser",
+                BreiteInZellen = 2,
+                LaengeInZellen = 2,
+                FarbeR = 180,
+                FarbeG = 30,
+                FarbeB = 30
+            };
+        }
     }
 }
