@@ -1,4 +1,6 @@
-﻿using Hochbeet_Planer.Models;
+﻿using Hochbeet_Planer.Data;
+using Hochbeet_Planer.Models;
+using System.Data.SQLite;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +28,8 @@ namespace Hochbeet_Planer
         public MainWindow()
         {
             InitializeComponent();
-            PflanzenLaden();
+            PflanzenLaden(); //PflanzenObjekte laden (später vl Datenbank dazu?)
+            DatabaseHelper.InitializeDatabase(); //Datenbank laden für Beet speichern und laden
         }
 
         private void BeetGenerieren(int breite, int laenge)
