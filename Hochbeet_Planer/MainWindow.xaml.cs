@@ -238,7 +238,7 @@ namespace Hochbeet_Planer
 
         private void btnLaden_Click(object sender, RoutedEventArgs e)
         {
-            if (lstBeete.SelectedItem == null)
+            if (lstBeete.SelectedItem == null) 
             {
                 MessageBox.Show("Bitte ein Beet aus der Liste auswählen!");
                 return;
