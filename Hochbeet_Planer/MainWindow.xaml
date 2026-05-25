@@ -51,7 +51,7 @@
                 <Border Background="#1a6b4a" Padding="8" HorizontalAlignment="Stretch">
                     <TextBlock Text="Gespeicherte Beete" Foreground="#e8f5ee" FontSize="14" FontWeight="Bold"/>
                 </Border>
-                <ListBox x:Name="listBeete" Height="120" Margin="8,4,8,4"/>
+                <ListBox x:Name="lstBeete" Height="120" Margin="8,4,8,4"/>
                 <!--rechts Pflanzen-->
                 <Border Background="#1a6b4a" Padding="8" HorizontalAlignment="Stretch">
                     <TextBlock Text="Pflanzenliste" Foreground="#e8f5ee" FontSize="14" FontWeight="Bold"/>
@@ -69,7 +69,7 @@
             <StackPanel Orientation="Horizontal" Margin="8,4,8,4">
                 <Button x:Name="btnZufall" Content="🎲 Zufallsbeet" Margin="4,6,4,6"/>
                 <Button x:Name="btnSpeichern" Content="💾 Speichern" Margin="4,6,4,6" Click="btnSpeichern_Click"/>
-                 <Button x:Name="btnLaden" Content="📂 Laden" Margin="4,6,4,6"/>
+                 <Button x:Name="btnLaden" Content="📂 Laden" Margin="4,6,4,6" Click="btnLaden_Click"/>
                 <Button x:Name="btnNeu" Content="🌱 Neu" Margin="4,6,4,6"/>
                 <Button x:Name="btnLoeschen" Content="🗑 Löschen" Margin="4,6,4,6"/>
             </StackPanel>
