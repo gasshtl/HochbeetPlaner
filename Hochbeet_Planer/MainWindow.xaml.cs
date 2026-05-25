@@ -152,7 +152,35 @@ namespace Hochbeet_Planer
                     ausgewaehltePflanze = p;
                 }
             }
-            MessageBox.Show("Ausgewählt: " + ausgewaehltePflanze?.Name);
+        }
+
+        private void btnSpeichern_Click(object sender, RoutedEventArgs e)
+        {
+            string beetName = txtBeetName.Text;
+            if (beetName == "")
+            {
+                MessageBox.Show("Gib einen Beetnamen ein!");
+                return;
+            }
+
+            using (SQLiteConnection conn = new SQLiteConnection(DatabaseHelper.ConnectionString))
+            {
+                conn.Open(); //connection zu db
+
+                //Beet speichern
+                string sql = @"
+                    INSERT INTO Beete (Name, Breite, Laenge)
+                    VALUES (@Name, @Breite, @Laenge)";
+
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name", beetName);
+                    cmd.Parameters.AddWithValue("@Breite", grdHochbeet.ColumnDefinitions.Count);
+                    cmd.Parameters.AddWithValue("@Laenge", grdHochbeet.RowDefinitions.Count);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            MessageBox.Show("Beet gespeichert :)");
         }
     }
 }

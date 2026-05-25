@@ -25,9 +25,10 @@
             <!--Mitte Hochbeetbereich-->
             <ScrollViewer Grid.Column="0" Margin="8"> <!--zum scrollen-->
                 <Grid x:Name="grdHochbeet" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            </ScrollViewer>
-            <!--rechts Maße-->
-            <StackPanel Grid.Column="1" Background="#f0f0e0" Margin="0" Width="auto">
+            </ScrollViewer>           
+            <!--rechter Bereich-->
+            <StackPanel Grid.Column="1" Background="#f0f0e0" Margin="0" Width="auto">                
+                <!--rechts Maße-->
                 <Border Background="#1a6b4a" Padding="8" HorizontalAlignment="Stretch">
                     <TextBlock Text="Hochbeet Maße" Foreground="#e8f5ee" FontSize="14" FontWeight="Bold"/>
                 </Border>
@@ -41,6 +42,12 @@
                 </StackPanel>
                 <Button x:Name="btnBeetGenerieren" Content="Beet generieren" Margin="8,4,8,8" 
                         Background="#1a6b4a" Foreground="#e8f5ee" Click="btnBeetGenerieren_Click"/>
+                <!--Beetname-->
+                <Border Background="#1a6b4a" Padding="8" HorizontalAlignment="Stretch">
+                    <TextBlock Text="Beetname" Foreground="#e8f5ee" FontSize="14" FontWeight="Bold"/>
+                </Border>
+                <TextBox x:Name="txtBeetName" Margin="8,4,8,8" Text="Mein Beet"/>
+                <!--Gespeicherte Beete-->
                 <Border Background="#1a6b4a" Padding="8" HorizontalAlignment="Stretch">
                     <TextBlock Text="Gespeicherte Beete" Foreground="#e8f5ee" FontSize="14" FontWeight="Bold"/>
                 </Border>
@@ -61,7 +68,7 @@
         <Grid Grid.Row="2" Background="#1a6b4a">
             <StackPanel Orientation="Horizontal" Margin="8,4,8,4">
                 <Button x:Name="btnZufall" Content="🎲 Zufallsbeet" Margin="4,6,4,6"/>
-                <Button x:Name="btnSpeichern" Content="💾 Speichern" Margin="4,6,4,6"/>
+                <Button x:Name="btnSpeichern" Content="💾 Speichern" Margin="4,6,4,6" Click="btnSpeichern_Click"/>
                  <Button x:Name="btnLaden" Content="📂 Laden" Margin="4,6,4,6"/>
                 <Button x:Name="btnNeu" Content="🌱 Neu" Margin="4,6,4,6"/>
                 <Button x:Name="btnLoeschen" Content="🗑 Löschen" Margin="4,6,4,6"/>
