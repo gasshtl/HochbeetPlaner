@@ -159,10 +159,33 @@ namespace Hochbeet_Planer
             }
         }
 
+        private void BeeteAnzeigen()
+        {
+            lstBeete.Items.Clear();
+
+            using (SQLiteConnection conn = new SQLiteConnection(DatabaseHelper.ConnectionString))
+            {
+                conn.Open();
+                string sql = "SELECT Name FROM Beete";
+
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                {
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            lstBeete.Items.Add(reader["Name"].ToString());
+                        }
+                    }
+                }
+            }
+
+        }
+
         private void btnSpeichern_Click(object sender, RoutedEventArgs e)
         {
             string beetName = txtBeetName.Text;
-            if (beetName == "")
+            if (beetName == "") 
             {
                 MessageBox.Show("Gib einen Beetnamen ein!");
                 return;
@@ -211,28 +234,6 @@ namespace Hochbeet_Planer
             }
             MessageBox.Show("Beet gespeichert :)");
             BeeteAnzeigen();
-        }
-        private void BeeteAnzeigen()
-        {
-            lstBeete.Items.Clear();
-
-            using (SQLiteConnection conn = new SQLiteConnection(DatabaseHelper.ConnectionString))
-            {
-                conn.Open();
-                string sql = "SELECT Name FROM Beete";
-
-                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
-                {
-                    using (SQLiteDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            lstBeete.Items.Add(reader["Name"].ToString());
-                        }
-                    }
-                }
-            }
-
         }
 
         private void btnLaden_Click(object sender, RoutedEventArgs e)
