@@ -46,7 +46,9 @@
                     <TextBlock Text="Pflanzenliste" Foreground="#e8f5ee" FontSize="14" FontWeight="Bold"/>
                 </Border>
                 <RadioButton x:Name="rbParadaiser" Content="🍅 Paradaiser" Margin="8,6,8,2" IsChecked="False"
-                             Checked="rbParadaiser_Checked"/> <!--Methode aufrufen bei checked angehakerlt-->
+                             Tag="Paradaiser" Checked="PflanzeAuswaehlen"/> <!--Methode aufrufen bei checked angehakerlt-->
+                <RadioButton x:Name="rbGurke" Content="🥒 Gurke" Margin="8,6,8,2" IsChecked="False"
+                             Tag="Gurke" Checked="PflanzeAuswaehlen"/>
 
             </StackPanel>
                        

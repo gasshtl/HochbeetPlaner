@@ -20,11 +20,13 @@ namespace Hochbeet_Planer
         private int zellenGroesse = 10; //1Zelle = 10cm
         private Border[,] zellenGrid;
         private Pflanze ausgewaehltePflanze;
-        
+        private List<Pflanze> pflanzenListe;
+
 
         public MainWindow()
         {
             InitializeComponent();
+            PflanzenLaden();
         }
 
         private void BeetGenerieren(int breite, int laenge)
@@ -55,9 +57,9 @@ namespace Hochbeet_Planer
             }
 
             //Zellen befüllen
-            for (int j = 0;j < anzahlZeilen; j++)
+            for (int j = 0; j < anzahlZeilen; j++)
             {
-                for(int i = 0; i < anzahlSpalten; i++)
+                for (int i = 0; i < anzahlSpalten; i++)
                 {
                     Border zelle = new Border
                     {
@@ -73,7 +75,17 @@ namespace Hochbeet_Planer
                     zelle.MouseLeftButtonDown += Zelle_Click;
                 }
             }
-
+        }
+        //die ganze Pflanzenliste
+        private void PflanzenLaden()
+        {
+            pflanzenListe = new List<Pflanze>
+            {
+                new Pflanze {Name = "Paradaiser", BreiteInZellen = 2, LaengeInZellen = 2,
+                FarbeR =180, FarbeG=30, FarbeB=30,},
+                new Pflanze {Name = "Gurke", BreiteInZellen = 3, LaengeInZellen = 2,
+                FarbeR=30, FarbeG=130, FarbeB=30}
+            };
         }
 
         private void btnBeetGenerieren_Click(object sender, RoutedEventArgs e)
@@ -82,51 +94,62 @@ namespace Hochbeet_Planer
             int laenge;
 
             //wie gewohnt Eingabe mit Tryparse und Fehlermeldung auf wpf
-            if(!int.TryParse(txtBreite.Text, out breite) || !int.TryParse(txtLaenge.Text, out laenge))
+            if (!int.TryParse(txtBreite.Text, out breite) || !int.TryParse(txtLaenge.Text, out laenge))
             {
                 MessageBox.Show("Bitte nur ganze Zahlen eingeben!");
                 return;
             }
-            BeetGenerieren(breite, laenge); 
+            BeetGenerieren(breite, laenge);
         }
 
         private void Zelle_Click(object sender, MouseButtonEventArgs e)
         {
-            
+
             Border zelle = (Border)sender; //der sender(die angeklickte Zelle) ist ein Border
 
             int zeile = Grid.GetRow(zelle); //hineinschreiben und ablesen ins array
             int spalte = Grid.GetColumn(zelle);
 
-            if (zeile + ausgewaehltePflanze.LaengeInZellen > zellenGrid.GetLength(0)) return;//damit Programm nicht mehr abstürzt
-            if (spalte + ausgewaehltePflanze.BreiteInZellen > zellenGrid.GetLength(1)) return;
+            if (ausgewaehltePflanze == null) return; //wenn nichts ausgewählt ist also null dann chill  
 
-            if (ausgewaehltePflanze == null ) return; //wenn nichts ausgewählt ist also null dann chill  
-
-            if (rbParadaiser.IsChecked == true) //ob Paradaeiser angehakerlt ist - ausgewählte Pflanze
+            //später unbedingt noch ausmerzen das die Farben sich überschreiben!
+            if (zeile + ausgewaehltePflanze.LaengeInZellen > zellenGrid.GetLength(0))
             {
-                for (int j = zeile; j < zeile + ausgewaehltePflanze.LaengeInZellen; j++)
-                {
-                    for (int i = spalte; i < spalte + ausgewaehltePflanze.BreiteInZellen; i++)
-                    {
-                        zellenGrid[j, i].Background =
-                            new SolidColorBrush(Color.FromRgb(180, 30, 30));
-                    }
+                MessageBox.Show(ausgewaehltePflanze.Name + " passt hier nicht rein!\n" +
+                    "Größe: " + ausgewaehltePflanze.BreiteInZellen +
+                    " x " + ausgewaehltePflanze.LaengeInZellen + " Zellen"); return;//return damit Programm nicht mehr abstürzt
+            }
+            if (spalte + ausgewaehltePflanze.BreiteInZellen > zellenGrid.GetLength(1))
+            {
+                MessageBox.Show(ausgewaehltePflanze.Name + " passt hier nicht rein!\n" +
+                    "Größe: " + ausgewaehltePflanze.BreiteInZellen +
+                    " x " + ausgewaehltePflanze.LaengeInZellen + " Zellen"); return;
+            }
+
+            for (int j = zeile; j < zeile + ausgewaehltePflanze.LaengeInZellen; j++)
+            {
+                for (int i = spalte; i < spalte + ausgewaehltePflanze.BreiteInZellen; i++)
+                { 
+                zellenGrid[j, i].Background = new SolidColorBrush(Color.FromRgb
+                                                            (ausgewaehltePflanze.FarbeR,
+                                                            ausgewaehltePflanze.FarbeG,
+                                                            ausgewaehltePflanze.FarbeB));
                 }
             }
         }
 
-        private void rbParadaiser_Checked(object sender, RoutedEventArgs e)
+        private void PflanzeAuswaehlen(object sender, RoutedEventArgs e)
         {
-            ausgewaehltePflanze = new Pflanze
+            RadioButton rb = (RadioButton) sender; //"sender as RadioButton"geht nicht weil könnte null sein
+
+            foreach (Pflanze p in pflanzenListe)
             {
-                Name = "Paradaiser",
-                BreiteInZellen = 2,
-                LaengeInZellen = 2,
-                FarbeR = 180,
-                FarbeG = 30,
-                FarbeB = 30
-            };
+                if (p.Name == rb.Tag.ToString()) //Tag von Xaml umwandeln weil kein Text
+                {
+                    ausgewaehltePflanze = p;
+                }
+            }
+            MessageBox.Show("Ausgewählt: " + ausgewaehltePflanze?.Name);
         }
     }
 }
