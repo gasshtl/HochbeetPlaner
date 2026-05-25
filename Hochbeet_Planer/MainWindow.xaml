@@ -47,7 +47,7 @@
                     <TextBlock Text="Beetname" Foreground="#e8f5ee" FontSize="14" FontWeight="Bold"/>
                 </Border>
                 <TextBox x:Name="txtBeetName" Margin="8,4,8,8" Text="Mein Beet"/>
-                <!--Gespeicherte Beete-->
+                <!--Gespeicherte Beete--> 
                 <Border Background="#1a6b4a" Padding="8" HorizontalAlignment="Stretch">
                     <TextBlock Text="Gespeicherte Beete" Foreground="#e8f5ee" FontSize="14" FontWeight="Bold"/>
                 </Border>
