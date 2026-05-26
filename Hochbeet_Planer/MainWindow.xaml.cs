@@ -118,8 +118,15 @@ namespace Hochbeet_Planer
             int zeile = Grid.GetRow(zelle); //hineinschreiben und ablesen ins array
             int spalte = Grid.GetColumn(zelle);
 
-            if (ausgewaehltePflanze == null) return; //wenn nichts ausgewählt ist also null dann chill  
+            if (ausgewaehltePflanze == null) return; //wenn nichts ausgewählt ist also null dann chill
 
+            //damit die Pflanzen sich nicht überschreiben
+            if (beetBelegung.ContainsKey(zeile + "_" + spalte))
+            {
+                MessageBox.Show("Hier wurde schon gepflanzt!");
+                return;
+            }
+            //erledigt da drüber
             //später unbedingt noch ausmerzen das die Farben sich überschreiben!
             if (zeile + ausgewaehltePflanze.LaengeInZellen > zellenGrid.GetLength(0))
             {
