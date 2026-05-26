@@ -88,9 +88,9 @@ namespace Hochbeet_Planer
             pflanzenListe = new List<Pflanze>
             {
                 new Pflanze {Name = "Paradaiser", BreiteInZellen = 2, LaengeInZellen = 2,
-                FarbeR =180, FarbeG=30, FarbeB=30,},
+                FarbeR =180, FarbeG=30, FarbeB=30, Abstand = 1},
                 new Pflanze {Name = "Gurke", BreiteInZellen = 3, LaengeInZellen = 2,
-                FarbeR=30, FarbeG=130, FarbeB=30}
+                FarbeR=30, FarbeG=130, FarbeB=30, Abstand = 1}
             };
         }
 
@@ -133,7 +133,7 @@ namespace Hochbeet_Planer
                     "Größe(bxl): " + ausgewaehltePflanze.BreiteInZellen +
                     " x " + ausgewaehltePflanze.LaengeInZellen + " Zellen"); return;
             }
-
+            //einfärben der Pflanze
             for (int j = zeile; j < zeile + ausgewaehltePflanze.LaengeInZellen; j++)
             {
                 for (int i = spalte; i < spalte + ausgewaehltePflanze.BreiteInZellen; i++)
@@ -144,6 +144,25 @@ namespace Hochbeet_Planer
                                                             ausgewaehltePflanze.FarbeB));
                     
                     beetBelegung[j + "_" + i] = ausgewaehltePflanze.Name;
+                }
+            }
+            //Abstand um die Pflanze herum
+            for (int j = zeile - ausgewaehltePflanze.Abstand; 
+                 j < zeile + ausgewaehltePflanze.LaengeInZellen + ausgewaehltePflanze.Abstand; j++)
+            {
+                for (int i = spalte - ausgewaehltePflanze.Abstand;
+                     i < spalte + ausgewaehltePflanze.BreiteInZellen + ausgewaehltePflanze.Abstand; i++)
+                {
+                    //nur wenn nicht schon Pflanze dort und innerhalb des Grids
+                    if (j >= 0 && i >= 0 &&
+                        j < zellenGrid.GetLength(0) &&
+                        i < zellenGrid.GetLength(1) &&
+                        !beetBelegung.ContainsKey(j + "_" + i))
+                    {
+                        zellenGrid[j, i].Background =
+                            new SolidColorBrush(Color.FromRgb(160, 110, 60));
+                        beetBelegung[j + "_" + i] = "Abstand";
+                    }
                 }
             }
         }
@@ -382,12 +401,28 @@ namespace Hochbeet_Planer
                            i + p.BreiteInZellen <= zellenGrid.GetLength(1))
                         { 
                             //dann ja einfärben!
-                            for (int jj = 0; jj < j + p.LaengeInZellen; jj++)
+                            for (int jj = j; jj < j + p.LaengeInZellen; jj++)
                             {
-                                for (int ii = 0; ii < i + p.BreiteInZellen; ii++)
+                                for (int ii = i; ii < i + p.BreiteInZellen; ii++)
                                 {
                                     zellenGrid[jj, ii].Background = new SolidColorBrush(Color.FromRgb(p.FarbeR, p.FarbeG, p.FarbeB));
                                     beetBelegung[jj.ToString() + "_" + ii.ToString()] = p.Name;
+                                }
+                            }
+                            //und Abstand rundherum!!
+                            for (int aj = j - p.Abstand; aj < j + p.LaengeInZellen + p.Abstand; aj++)
+                            {
+                                for (int ai = i - p.Abstand; ai < i + p.BreiteInZellen + p.Abstand; ai++)
+                                {
+                                    if (aj >= 0 && ai >= 0 &&
+                                        aj < zellenGrid.GetLength(0) &&
+                                        ai < zellenGrid.GetLength(1) &&
+                                        !beetBelegung.ContainsKey(aj.ToString() + "_" + ai.ToString()))
+                                    {
+                                        zellenGrid[aj, ai].Background =
+                                            new SolidColorBrush(Color.FromRgb(160, 110, 60));
+                                        beetBelegung[aj.ToString() + "_" + ai.ToString()] = "Abstand";
+                                    }
                                 }
                             }
                         }
