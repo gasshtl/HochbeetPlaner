@@ -432,7 +432,22 @@ namespace Hochbeet_Planer
                         //pflanze hat platz? 
                         if(j + p.LaengeInZellen <= zellenGrid.GetLength(0) &&
                            i + p.BreiteInZellen <= zellenGrid.GetLength(1))
-                        { 
+                        {
+                            //Überlappung vermeiden
+                            bool alleFrei = true;
+                            for (int jj = j; jj < j + p.LaengeInZellen; jj++)
+                            {
+                                for (int ii = i; ii < i + p.BreiteInZellen; ii++)
+                                {
+                                    if (beetBelegung.ContainsKey(jj.ToString() + "_" + ii.ToString()))
+                                    {
+                                        alleFrei = false;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (!alleFrei) continue;
+
                             //dann ja einfärben!
                             for (int jj = j; jj < j + p.LaengeInZellen; jj++)
                             {
