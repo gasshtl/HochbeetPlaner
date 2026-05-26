@@ -71,7 +71,7 @@
                 <Button x:Name="btnSpeichern" Content="💾 Speichern" Margin="4,6,4,6" Click="btnSpeichern_Click"/>
                  <Button x:Name="btnLaden" Content="📂 Laden" Margin="4,6,4,6" Click="btnLaden_Click"/>
                 <Button x:Name="btnNeu" Content="🌱 Neu" Margin="4,6,4,6"/>
-                <Button x:Name="btnLoeschen" Content="🗑 Löschen" Margin="4,6,4,6"/>
+                <Button x:Name="btnLoeschen" Content="🗑 Löschen" Margin="4,6,4,6" Click="btnLoeschen_Click"/>
             </StackPanel>
         </Grid>
     </Grid>

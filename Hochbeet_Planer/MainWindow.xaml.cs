@@ -96,6 +96,8 @@ namespace Hochbeet_Planer
 
         private void btnBeetGenerieren_Click(object sender, RoutedEventArgs e)
         {
+            beetBelegung.Clear(); //damit keine Überlappungen entstehen
+
             int breite;
             int laenge;
 
@@ -238,6 +240,8 @@ namespace Hochbeet_Planer
 
         private void btnLaden_Click(object sender, RoutedEventArgs e)
         {
+            //Beet erst leeren sonst gibts Überlappung!!
+            beetBelegung.Clear();
             if (lstBeete.SelectedItem == null) 
             {
                 MessageBox.Show("Bitte ein Beet aus der Liste auswählen!");
@@ -262,6 +266,8 @@ namespace Hochbeet_Planer
                             int breite = (int)(long)reader["Breite"];
                             int laenge = (int)(long)reader["Laenge"];
                             BeetGenerieren(breite * zellenGroesse, laenge * zellenGroesse);
+                            grdHochbeet.UpdateLayout();
+
                         }
                     }
                 }
@@ -291,8 +297,12 @@ namespace Hochbeet_Planer
                             Pflanze p = pflanzenListe.Find(x => x.Name == pflanzenName);
                             if (p != null)
                             {
-                                zellenGrid[zeile, spalte].Background =
-                                    new SolidColorBrush(Color.FromRgb(p.FarbeR, p.FarbeG, p.FarbeB));
+                                if (zeile < zellenGrid.GetLength(0) && spalte < zellenGrid.GetLength(1))
+                                {
+                                    zellenGrid[zeile, spalte].Background =
+                                        new SolidColorBrush(Color.FromRgb(p.FarbeR, p.FarbeG, p.FarbeB));
+                                    beetBelegung[zeile.ToString() + "_" + spalte.ToString()] = pflanzenName;
+                                }
                             }
                         }
                     }
@@ -301,7 +311,49 @@ namespace Hochbeet_Planer
 
 
         }
-       
-        
+
+        private void btnLoeschen_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstBeete.SelectedItem == null)
+            {
+                MessageBox.Show("Bitte ein Beet auswählen!");
+                return;
+            }
+
+            string beetName = lstBeete.SelectedItem.ToString();
+
+            using (SQLiteConnection conn = new SQLiteConnection(DatabaseHelper.ConnectionString))
+            {
+                conn.Open();
+
+                //BeetId holen
+                int beetId = 0;
+                string sqlId = "SELECT Id FROM Beete WHERE Name = @Name";
+                using (SQLiteCommand cmd = new SQLiteCommand(sqlId, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name", beetName);
+                    beetId = (int)(long)cmd.ExecuteScalar();
+                }
+
+                //Belegung löschen
+                string sqlBelegung = "DELETE FROM BeetBelegung WHERE BeetId = @BeetId";
+                using (SQLiteCommand cmd = new SQLiteCommand(sqlBelegung, conn))
+                {
+                    cmd.Parameters.AddWithValue("@BeetId", beetId);
+                    cmd.ExecuteNonQuery();
+                }
+
+                //Beet löschen
+                string sqlBeet = "DELETE FROM Beete WHERE Id = @Id";
+                using (SQLiteCommand cmd = new SQLiteCommand(sqlBeet, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", beetId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            MessageBox.Show(beetName + " wurde gelöscht!");
+            BeeteAnzeigen();
+        }
     }
 }
