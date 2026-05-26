@@ -77,7 +77,7 @@ Tabelle `BeetBelegung`: Id, BeetId, Zeile, Spalte, PflanzenName
 
 ![Startbildschirm](screenshots/startbildschirm.png)
 ![Hauptfenster](screenshots/hauptfenster.png)
-![Planungsskizze](screenshots/Planung.png)
+![Planungsskizze](screenshots/Planung.jpeg)
 
 ## Verwendete Technologien
 
