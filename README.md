@@ -51,6 +51,28 @@ Tabelle `BeetBelegung`: Id, BeetId, Zeile, Spalte, PflanzenName
 *(handgezeichnete Skizze folgt)*
 
 
+## Installation und Start
+
+1. Repository klonen oder ZIP herunterladen
+2. Projekt in Visual Studio öffnen (`Hochbeet_Planer.sln`)
+3. NuGet Pakete werden automatisch wiederhergestellt
+4. F5 drücken oder "Starten" klicken
+
+
+## Bedienungsanleitung
+
+1. App starten → Startbildschirm erscheint → **START** drücken
+2. Beetgröße in cm eingeben (Breite und Länge) → **"Beet generieren"** klicken
+3. Pflanze in der Pflanzenliste auswählen
+4. Auf eine Zelle im Beet klicken → Pflanze wird platziert
+5. Oder **"Zufallsbeet"** klicken → Beet wird automatisch befüllt
+6. Beetname eingeben → **"Speichern"** klicken
+7. Gespeichertes Beet in der Liste auswählen → **"Laden"** klicken
+8. Nicht mehr benötigtes Beet auswählen → **"Löschen"** klicken
+
+*Tipp: Mit der Maus über eine Pflanze fahren zeigt Infos zur Erntezeit, Wasser und Sonne!*
+
+
 ## Screenshots
 
 *(Screenshots folgen)*
