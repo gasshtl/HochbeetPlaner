@@ -355,5 +355,45 @@ namespace Hochbeet_Planer
             MessageBox.Show(beetName + " wurde gelöscht!");
             BeeteAnzeigen();
         }
+
+        private void btnZufall_Click(object sender, RoutedEventArgs e)
+        {
+            if(zellenGrid == null)
+            {
+                MessageBox.Show("Bitte zuerst Beet generieren!");
+                return;
+            }
+
+            Random zufall = new Random();
+
+            for (int j = 0; j < zellenGrid.GetLength(0); j++)
+            {
+                for(int i = 0; i < zellenGrid.GetLength(1); i++)
+                {
+                    //tostring weil i und j ja int sind!
+                    if (!beetBelegung.ContainsKey(j.ToString() + "_" + i.ToString()))
+                    {
+                        //zufällige Pflanze aus der Liste 
+                        int index = zufall.Next(0, pflanzenListe.Count);
+                        Pflanze p = pflanzenListe[index];
+
+                        //pflanze hat platz? 
+                        if(j + p.LaengeInZellen <= zellenGrid.GetLength(0) &&
+                           i + p.BreiteInZellen <= zellenGrid.GetLength(1))
+                        { 
+                            //dann ja einfärben!
+                            for (int jj = 0; jj < j + p.LaengeInZellen; jj++)
+                            {
+                                for (int ii = 0; ii < i + p.BreiteInZellen; ii++)
+                                {
+                                    zellenGrid[jj, ii].Background = new SolidColorBrush(Color.FromRgb(p.FarbeR, p.FarbeG, p.FarbeB));
+                                    beetBelegung[jj.ToString() + "_" + ii.ToString()] = p.Name;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

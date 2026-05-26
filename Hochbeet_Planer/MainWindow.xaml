@@ -67,7 +67,7 @@
         <!--"Footer" Buttons-->
         <Grid Grid.Row="2" Background="#1a6b4a">
             <StackPanel Orientation="Horizontal" Margin="8,4,8,4">
-                <Button x:Name="btnZufall" Content="🎲 Zufallsbeet" Margin="4,6,4,6"/>
+                <Button x:Name="btnZufall" Content="🎲 Zufallsbeet" Margin="4,6,4,6" Click="btnZufall_Click"/>
                 <Button x:Name="btnSpeichern" Content="💾 Speichern" Margin="4,6,4,6" Click="btnSpeichern_Click"/>
                  <Button x:Name="btnLaden" Content="📂 Laden" Margin="4,6,4,6" Click="btnLaden_Click"/>
                 <Button x:Name="btnNeu" Content="🌱 Neu" Margin="4,6,4,6"/>
