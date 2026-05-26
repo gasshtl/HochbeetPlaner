@@ -88,9 +88,21 @@ namespace Hochbeet_Planer
             pflanzenListe = new List<Pflanze>
             {
                 new Pflanze {Name = "Paradaiser", BreiteInZellen = 2, LaengeInZellen = 2,
-                FarbeR =180, FarbeG=30, FarbeB=30, Abstand = 1},
+                    FarbeR =180, FarbeG=30, FarbeB=30, Abstand = 1},
                 new Pflanze {Name = "Gurke", BreiteInZellen = 3, LaengeInZellen = 2,
-                FarbeR=30, FarbeG=130, FarbeB=30, Abstand = 1}
+                    FarbeR=30, FarbeG=130, FarbeB=30, Abstand = 1},
+                new Pflanze { Name = "Chilli", BreiteInZellen = 1, LaengeInZellen = 1, 
+                    FarbeR = 220, FarbeG = 20, FarbeB = 20, Abstand = 1 },
+                new Pflanze { Name = "Karotte", BreiteInZellen = 1, LaengeInZellen = 1, 
+                    FarbeR = 255, FarbeG = 140, FarbeB = 0, Abstand = 1 },
+                new Pflanze { Name = "Salat", BreiteInZellen = 2, LaengeInZellen = 2, 
+                    FarbeR = 180, FarbeG = 230, FarbeB = 100, Abstand = 1 },
+                new Pflanze { Name = "Paprika", BreiteInZellen = 2, LaengeInZellen = 2, 
+                    FarbeR = 255, FarbeG = 200, FarbeB = 0, Abstand = 1 },
+                new Pflanze { Name = "Aubergine", BreiteInZellen = 2, LaengeInZellen = 2, 
+                    FarbeR = 128, FarbeG = 0, FarbeB = 128, Abstand = 1 },
+                new Pflanze { Name = "Zucchini", BreiteInZellen = 3, LaengeInZellen = 3, 
+                    FarbeR = 0, FarbeG = 100, FarbeB = 0, Abstand = 1 },
             };
         }
 

@@ -23,11 +23,13 @@
                 <ColumnDefinition Width="250"/>
             </Grid.ColumnDefinitions>
             <!--Mitte Hochbeetbereich-->
-            <ScrollViewer Grid.Column="0" Margin="8"> <!--zum scrollen-->
+            <ScrollViewer Grid.Column="0" Margin="8" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"> <!--zum scrollen-->
                 <Grid x:Name="grdHochbeet" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </ScrollViewer>           
             <!--rechter Bereich-->
-            <StackPanel Grid.Column="1" Background="#f0f0e0" Margin="0" Width="auto">                
+
+            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Background="#f0f0e0" Margin="0" Width="auto" >                
                 <!--rechts Maße-->
                 <Border Background="#1a6b4a" Padding="8" HorizontalAlignment="Stretch">
                     <TextBlock Text="Hochbeet Maße" Foreground="#e8f5ee" FontSize="14" FontWeight="Bold"/>
@@ -56,12 +58,24 @@
                 <Border Background="#1a6b4a" Padding="8" HorizontalAlignment="Stretch">
                     <TextBlock Text="Pflanzenliste" Foreground="#e8f5ee" FontSize="14" FontWeight="Bold"/>
                 </Border>
-                <RadioButton x:Name="rbParadaiser" Content="🍅 Paradaiser" Margin="8,6,8,2" IsChecked="False"
-                             Tag="Paradaiser" Checked="PflanzeAuswaehlen"/> <!--Methode aufrufen bei checked angehakerlt-->
-                <RadioButton x:Name="rbGurke" Content="🥒 Gurke" Margin="8,6,8,2" IsChecked="False"
-                             Tag="Gurke" Checked="PflanzeAuswaehlen"/>
-
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="200">
+                <!--HIER PFLANZENBUTTONS-->
+                    <StackPanel MaxHeight="200">
+                        <RadioButton Content="🍅 Paradaiser" Tag="Paradaiser" Margin="8,6,8,2" IsChecked="False" Checked="PflanzeAuswaehlen"/>
+                              <!--Methode aufrufen bei checked angehakerlt-->
+                        <RadioButton Content="🥒 Gurke" Tag="Gurke" Margin="8,6,8,2" IsChecked="False" Checked="PflanzeAuswaehlen"/>
+                        <RadioButton Content="🌶️ Chilli" Tag="Chilli" Margin="8,6,8,2" Checked="PflanzeAuswaehlen"/>
+                        <RadioButton Content="🥕 Karotte" Tag="Karotte" Margin="8,6,8,2" Checked="PflanzeAuswaehlen"/>
+                        <RadioButton Content="🥬 Salat" Tag="Salat" Margin="8,6,8,2" Checked="PflanzeAuswaehlen"/>
+                        <RadioButton Content="🫑 Paprika" Tag="Paprika" Margin="8,6,8,2" Checked="PflanzeAuswaehlen"/>
+                        <RadioButton Content="🍆 Aubergine" Tag="Aubergine" Margin="8,6,8,2" Checked="PflanzeAuswaehlen"/>
+                        <RadioButton Content="🥦 Zucchini" Tag="Zucchini" Margin="8,6,8,2" Checked="PflanzeAuswaehlen"/>
+                    </StackPanel>
+                </ScrollViewer>
+                
             </StackPanel>
+            </ScrollViewer>
+                
                        
         </Grid>
         <!--"Footer" Buttons-->
