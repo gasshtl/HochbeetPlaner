@@ -72,7 +72,8 @@ namespace Hochbeet_Planer
                         Background = new SolidColorBrush(Color.FromRgb(139, 90, 43)),
                         BorderBrush = new SolidColorBrush(Color.FromRgb(101, 67, 33)),
                         Margin = new Thickness(2),
-                        Cursor = Cursors.Hand //hand zeiger wie startseite
+                        Cursor = Cursors.Hand, //hand zeiger wie startseite
+                        ToolTip = "Leer" //mouseoverInfos
                     };
                     Grid.SetRow(zelle, j);
                     Grid.SetColumn(zelle, i);
@@ -88,21 +89,29 @@ namespace Hochbeet_Planer
             pflanzenListe = new List<Pflanze>
             {
                 new Pflanze {Name = "Paradaiser", BreiteInZellen = 2, LaengeInZellen = 2,
-                    FarbeR =180, FarbeG=30, FarbeB=30, Abstand = 1},
+                    FarbeR =180, FarbeG=30, FarbeB=30, Abstand = 1,
+                    Erntezeit = "Juli-Oktober", Wasser = "Viel", Sonne = "Vollsonne" },
                 new Pflanze {Name = "Gurke", BreiteInZellen = 3, LaengeInZellen = 2,
-                    FarbeR=30, FarbeG=130, FarbeB=30, Abstand = 1},
+                    FarbeR=30, FarbeG=130, FarbeB=30, Abstand = 1,
+                    Erntezeit = "Juni-September", Wasser = "Viel", Sonne = "Vollsonne"},
                 new Pflanze { Name = "Chilli", BreiteInZellen = 1, LaengeInZellen = 1, 
-                    FarbeR = 220, FarbeG = 20, FarbeB = 20, Abstand = 1 },
+                    FarbeR = 220, FarbeG = 20, FarbeB = 20, Abstand = 1,
+                    Erntezeit = "August-Oktober", Wasser = "Mittel", Sonne = "Vollsonne"},
                 new Pflanze { Name = "Karotte", BreiteInZellen = 1, LaengeInZellen = 1, 
-                    FarbeR = 255, FarbeG = 140, FarbeB = 0, Abstand = 1 },
+                    FarbeR = 255, FarbeG = 140, FarbeB = 0, Abstand = 1,
+                    Erntezeit = "Juli-Oktober", Wasser = "Mittel", Sonne = "Vollsonne" },
                 new Pflanze { Name = "Salat", BreiteInZellen = 2, LaengeInZellen = 2, 
-                    FarbeR = 180, FarbeG = 230, FarbeB = 100, Abstand = 1 },
+                    FarbeR = 180, FarbeG = 230, FarbeB = 100, Abstand = 1,
+                    Erntezeit = "April-Oktober", Wasser = "Viel", Sonne = "Halbschatten"},
                 new Pflanze { Name = "Paprika", BreiteInZellen = 2, LaengeInZellen = 2, 
-                    FarbeR = 255, FarbeG = 200, FarbeB = 0, Abstand = 1 },
+                    FarbeR = 255, FarbeG = 200, FarbeB = 0, Abstand = 1,
+                    Erntezeit = "August-Oktober", Wasser = "Mittel", Sonne = "Vollsonne"},
                 new Pflanze { Name = "Aubergine", BreiteInZellen = 2, LaengeInZellen = 2, 
-                    FarbeR = 128, FarbeG = 0, FarbeB = 128, Abstand = 1 },
+                    FarbeR = 128, FarbeG = 0, FarbeB = 128, Abstand = 1,
+                    Erntezeit = "August-Oktober", Wasser = "Viel", Sonne = "Vollsonne"},
                 new Pflanze { Name = "Zucchini", BreiteInZellen = 3, LaengeInZellen = 3, 
-                    FarbeR = 0, FarbeG = 100, FarbeB = 0, Abstand = 1 },
+                    FarbeR = 0, FarbeG = 100, FarbeB = 0, Abstand = 1,
+                    Erntezeit = "Juni-September", Wasser = "Viel", Sonne = "Vollsonne" },
             };
         }
 
@@ -163,8 +172,13 @@ namespace Hochbeet_Planer
                                                             ausgewaehltePflanze.FarbeB));
                     
                     beetBelegung[j + "_" + i] = ausgewaehltePflanze.Name;
+                    //Infokasten mouseover
+                    zellenGrid[j,i].ToolTip = ausgewaehltePflanze.Name + "\n" + "Erntezeit: " + ausgewaehltePflanze.Erntezeit + "\n" +
+                                 "Wasser: " + ausgewaehltePflanze.Wasser + "\n" + "Sonne: " + ausgewaehltePflanze.Sonne;
                 }
             }
+            
+
             //Abstand um die Pflanze herum
             for (int j = zeile - ausgewaehltePflanze.Abstand; 
                  j < zeile + ausgewaehltePflanze.LaengeInZellen + ausgewaehltePflanze.Abstand; j++)
@@ -426,6 +440,8 @@ namespace Hochbeet_Planer
                                 {
                                     zellenGrid[jj, ii].Background = new SolidColorBrush(Color.FromRgb(p.FarbeR, p.FarbeG, p.FarbeB));
                                     beetBelegung[jj.ToString() + "_" + ii.ToString()] = p.Name;
+                                    zellenGrid[jj, ii].ToolTip = p.Name + "\n" + "Erntezeit: " + p.Erntezeit + "\n" +
+                                                                "Wasser: " + p.Wasser + "\n" + "Sonne: " + p.Sonne;
                                 }
                             }
                             //und Abstand rundherum!!

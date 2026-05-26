@@ -20,6 +20,11 @@ namespace Hochbeet_Planer.Models
         //Abstand zwischen Pflanzen
         public int Abstand { get; set; }
 
+        //Zusatzinfos
+        public string Erntezeit { get; set; }
+        public string Wasser { get; set; }
+        public string Sonne { get; set; }
+
 
     }
 }
